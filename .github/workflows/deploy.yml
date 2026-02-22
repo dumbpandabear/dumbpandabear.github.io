@@ -35,19 +35,20 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install dependencies
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: Install Python dependencies
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Build site
         run: |
-          # Generate notebooks and HTML from .py sources
-          jupytext --to ipynb posts/*.py
-          jupytext --execute --to ipynb posts/*.py
-          jupyter nbconvert --to html posts/*.ipynb
-          mkdir -p docs
-          mv posts/*.html docs/
+          # Use Makefile to ensure same build process as local development
+          make html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

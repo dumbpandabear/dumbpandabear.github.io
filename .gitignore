@@ -1,6 +1,7 @@
 # Build artifacts - notebooks are generated from .py files
 *.ipynb
 posts/*.md
+*_files/
 
 # Optional: Uncomment to not commit HTML (let GitHub Actions build it)
 # docs/*.html
