@@ -1,7 +1,0 @@
-.hugo_build.lock
-
-# generated public/ directory
-public/
-
-# generated resources/ directory
-resources/
