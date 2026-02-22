@@ -1,0 +1,63 @@
+# Virtual environment paths
+VENV = venv
+PYTHON = $(VENV)/bin/python
+PIP = $(VENV)/bin/pip
+JUPYTEXT = $(VENV)/bin/jupytext
+JUPYTER = $(VENV)/bin/jupyter
+BLACK = $(VENV)/bin/black
+FLAKE8 = $(VENV)/bin/flake8
+
+.PHONY: notebook py html blog black flake clean setup help
+
+help:
+	@echo "Available commands:"
+	@echo "  make setup     - Create venv and install dependencies"
+	@echo "  make notebook  - Generate .ipynb from .py using jupytext"
+	@echo "  make py        - Sync .ipynb to .py (after writing in Jupyter)"
+	@echo "  make html      - Generate HTML from notebook"
+	@echo "  make blog      - Build full blog with custom CSS"
+	@echo "  make black     - Format code with black"
+	@echo "  make flake     - Check code with flake8"
+	@echo "  make clean     - Remove generated files"
+
+setup:
+	python3 -m venv $(VENV)
+	$(PIP) install --upgrade pip
+	$(PIP) install -r requirements.txt
+	@echo ""
+	@echo "✅ Setup complete! Virtual environment created at ./venv"
+	@echo "   All make commands will automatically use this venv."
+
+notebook: posts/*.py
+	$(JUPYTEXT) --to ipynb posts/*.py
+
+py: posts/*.ipynb
+	$(JUPYTEXT) --to py:percent posts/*.ipynb
+
+execute: posts/*.py
+	$(JUPYTEXT) --execute --to ipynb posts/*.py
+
+html: posts/*.py
+	$(JUPYTEXT) --execute --to ipynb posts/*.py
+	$(JUPYTER) nbconvert --to html posts/*.ipynb
+	mkdir -p docs
+	mv posts/*.html docs/
+
+blog: posts/*.py
+	$(JUPYTEXT) --execute --to ipynb posts/*.py
+	$(JUPYTER) nbconvert --to markdown --execute posts/*.ipynb
+	mkdir -p docs
+	# Simple conversion without pandoc for now
+	$(JUPYTER) nbconvert --to html posts/*.ipynb
+	mv posts/*.html docs/
+
+black: posts/*.py
+	$(BLACK) --line-length 79 posts/*.py
+
+flake: posts/*.py
+	$(FLAKE8) --show-source posts/*.py
+
+clean:
+	rm -f posts/*.ipynb
+	rm -f posts/*.md
+	rm -rf docs/*.html
