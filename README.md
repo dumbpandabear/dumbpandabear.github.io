@@ -22,10 +22,9 @@ make py
 # 4. Build HTML
 make html
 
-# 5. Commit (only .py files!)
-git add posts/*.py
+# 5. Commit
+git add posts
 git commit -m "Add post"
-git push
 ```
 
 GitHub Actions automatically deploys to https://dumbpandabear.github.io
