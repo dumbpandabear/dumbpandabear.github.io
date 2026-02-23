@@ -1,5 +1,4 @@
-# Build artifacts - notebooks are generated from .py files
-*.ipynb
+# Build artifacts
 posts/*.md
 *_files/
 

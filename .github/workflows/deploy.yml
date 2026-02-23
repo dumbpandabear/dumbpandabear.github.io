@@ -1,4 +1,4 @@
-name: Deploy Jupytext Blog to Pages
+name: Deploy Blog to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -47,8 +47,7 @@ jobs:
 
       - name: Build site
         run: |
-          # Use Makefile to ensure same build process as local development
-          make html
+          make blog
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

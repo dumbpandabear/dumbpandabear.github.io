@@ -1,8 +1,5 @@
-jupytext
 jupyter
 nbconvert
-black
-flake8
 torch
 numpy
 matplotlib
