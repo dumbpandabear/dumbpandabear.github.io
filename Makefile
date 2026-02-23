@@ -1,11 +1,22 @@
-# Virtual environment paths
+# Virtual environment paths (if venv exists, use it; otherwise use system binaries)
 VENV = venv
-PYTHON = $(VENV)/bin/python
-PIP = $(VENV)/bin/pip
-JUPYTEXT = $(VENV)/bin/jupytext
-JUPYTER = $(VENV)/bin/jupyter
-BLACK = $(VENV)/bin/black
-FLAKE8 = $(VENV)/bin/flake8
+VENV_EXISTS := $(shell [ -d $(VENV) ] && echo 1 || echo 0)
+
+ifeq ($(VENV_EXISTS),1)
+    PYTHON = $(VENV)/bin/python
+    PIP = $(VENV)/bin/pip
+    JUPYTEXT = $(VENV)/bin/jupytext
+    JUPYTER = $(VENV)/bin/jupyter
+    BLACK = $(VENV)/bin/black
+    FLAKE8 = $(VENV)/bin/flake8
+else
+    PYTHON = python3
+    PIP = pip3
+    JUPYTEXT = jupytext
+    JUPYTER = jupyter
+    BLACK = black
+    FLAKE8 = flake8
+endif
 
 .PHONY: notebook py html blog black flake clean setup help
 
