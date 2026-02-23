@@ -66,6 +66,7 @@ plt.show()
 # ## Conclusion
 #
 # This is the Harvard NLP-style workflow:
+#
 # - Write in `.py` files (source control friendly)
 # - Generate `.ipynb` with `make notebook`
 # - Generate HTML with `make html`

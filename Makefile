@@ -57,14 +57,14 @@ html: posts/*.py
 	mkdir -p docs
 	@for md in posts/*.md; do \
 		base=$$(basename "$$md" .md); \
-		pandoc "$$md" -o "docs/$$base.html" --template=pandoc_template.html --standalone; \
+		pandoc "$$md" -o "docs/$$base.html" --template=pandoc_template.html --standalone --katex; \
 		if [ -d "posts/$${base}_files" ]; then \
 			cp -r "posts/$${base}_files" docs/; \
 		fi; \
 	done
 	rm -f posts/*.md
 	rm -rf posts/*_files
-	@echo "✅ Notebooks converted with Pandoc (Annotated Transformer styling)"
+	@echo "✅ Notebooks converted with Pandoc"
 
 blog: html
 	@echo "✅ Blog built successfully"

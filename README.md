@@ -1,6 +1,6 @@
 # dumbpandabear.github.io
 
-My blog using the [Annotated Transformer](https://nlp.seas.harvard.edu/annotated-transformer/) styling.
+My technical blog with deep dives and learning notes.
 
 ## Setup (One Time)
 
@@ -45,11 +45,11 @@ The build process converts notebooks to HTML:
 3. `.md` → `.html` (via Pandoc with custom template)
 4. Copy `*_files/` image directories to `docs/`
 
-The final HTML uses the Annotated Transformer styling with:
+The final HTML includes:
 - Tufte CSS for elegant typography
 - Embedded fonts (self-contained HTML)
-- Syntax highlighting
-- Math rendering support
+- Syntax highlighting with highlight.js
+- Math rendering with KaTeX
 
 **Note:** Image directories (`docs/*_files/`) are build artifacts that are automatically regenerated from notebooks. They're gitignored - only commit the source `.py` files and the final `.html` files.
 
